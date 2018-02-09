@@ -169,10 +169,25 @@ var Main = (function (_super) {
      */
     Main.prototype.createGameScene = function () {
         var bg = new egret.Shape();
+        var tx = new egret.TextField();
+        this.addChild(bg);
+        this.addChild(tx);
+        // 背景
         bg.graphics.beginFill(0x336699);
         bg.graphics.drawRect(0, 0, this.stage.stageWidth, this.stage.stageHeight);
         bg.graphics.endFill();
-        this.addChild(bg);
+        // 文字
+        tx.text = 'Hello World, Egret and Game!';
+        tx.size = 32;
+        tx.x = 20;
+        tx.y = 20;
+        tx.width = this.stage.stageWidth - 40;
+        tx.touchEnabled = true;
+        // tx.addEventListener(egret.TouchEvent.TOUCH_TAP, this.touchHandler, this)
+        tx.addEventListener(egret.TouchEvent.TOUCH_TAP, function (evt) {
+            tx.textColor = 0x00ff00;
+            tx.size = 42;
+        }, this);
         console.log('Game Start!');
     };
     return Main;
